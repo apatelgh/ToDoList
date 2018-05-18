@@ -38,13 +38,17 @@ class AddToDoViewController: UIViewController {
  */
         if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
         
-        let toDo = ToDoCoreData(entity: ToDoCoreData.entity(), insertInto: context)
-        
-            if let titleText = titleTextField.text {
-                toDo.name = titleText
-                toDo.important = importantSwitch.isOn
-            }
             
+            if let titleText = titleTextField.text {
+                if titleText != "" {
+                    
+                let toDo = ToDoCoreData(entity: ToDoCoreData.entity(), insertInto: context)
+ 
+                toDo.name = titleText
+                    toDo.important = importantSwitch.isOn
+                }
+            }
+           
             try? context.save()
             
             navigationController?.popViewController(animated: true)
